@@ -98,6 +98,12 @@ many1(P,[C|Cs]) --> call(P,C), many(P,Cs).
 option(P,_,R) --> call(P,R).
 option(_,R,R) --> [].
 
+parse_times(_,0,[]) --> [].
+parse_times(P,N,[R|Rs]) -->
+    call(P,R),
+    {NewN #= N - 1},
+    parse_times(P,NewN,Rs).
+
 num_hexchar(0,'0').
 num_hexchar(1,'1').
 num_hexchar(2,'2').
